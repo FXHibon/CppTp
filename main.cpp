@@ -37,18 +37,8 @@ List *create() {
 void push(List *list, int val) {
     Cell *cell = (Cell *) malloc(sizeof(Cell));
     cell->value = val;
-    cell->next = NULL;
-
-    Cell *tmp = list->first;
-
-    if (tmp == NULL) {
-        list->first = cell;
-    } else {
-        while (tmp->next != NULL) {
-            tmp = tmp->next;
-        }
-        tmp->next = cell;
-    }
+    cell->next = list->first;
+    list->first = cell;
 }
 
 /**
