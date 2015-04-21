@@ -2,8 +2,7 @@
 // Created by fx on 21/04/2015.
 //
 
-template<typename T>
-template<typename E>
+template<typename T, typename E>
 class Result {
 
 private:
@@ -23,11 +22,17 @@ public:
     }
 
     T get() {
-        return val;
+        if (!isErr) {
+            return val;
+        }
+        throw;
     }
 
     E getError() {
-        return error;
+        if (isErr) {
+            return error;
+        }
+        throw;
     }
 
     bool isError() {
