@@ -32,7 +32,7 @@ List *create() {
 }
 
 /**
- * Add new elem at the end of the list
+ * Add new elem at the begining of the list
  */
 void push(List *list, int val) {
     Cell *cell = (Cell *) malloc(sizeof(Cell));
@@ -42,7 +42,7 @@ void push(List *list, int val) {
 }
 
 /**
- * Remove and return last elem of the list
+ * Remove and return first elem of the list or -1 if empty
  */
 int pop(List *list) {
     if (list->first == NULL) {
