@@ -47,22 +47,9 @@ void push(List *list, int val) {
 int pop(List *list) {
     if (list->first == NULL) {
         return -1;
-    } else if (list->first->next == NULL) {
-        int val = list->first->value;
-        list->first = NULL;
-        free(list->first);
-        return val;
     } else {
-        Cell *tmp = list->first;
-        Cell *last = tmp;
-
-        while (tmp->next != NULL) {
-            last = tmp;
-            tmp = tmp->next;
-        }
-        int val = tmp->value;
-        free(tmp);
-        last->next = NULL;
+        int val = list->first->value;
+        list->first = list->first->next;
         return val;
     }
 }
@@ -128,6 +115,10 @@ int main() {
         push(maListe, i * 10);
     }
 
+    cout << "Size = " << length(maListe) << endl;
+    toString(maListe);
+
+    cout << "pop = " << pop(maListe) << endl;
     cout << "Size = " << length(maListe) << endl;
     toString(maListe);
     return 0;
