@@ -26,7 +26,7 @@ int get(List *, int);
  * Create new list
  */
 List *create() {
-    List *newList = (List *) malloc(sizeof(List));
+    List *newList = new List;
     newList->first = NULL;
     return newList;
 }
@@ -35,7 +35,7 @@ List *create() {
  * Add new elem at the begining of the list
  */
 void push(List *list, int val) {
-    Cell *cell = (Cell *) malloc(sizeof(Cell));
+    Cell *cell = new Cell;
     cell->value = val;
     cell->next = list->first;
     list->first = cell;
@@ -49,6 +49,7 @@ int pop(List *list) {
         return -1;
     } else {
         int val = list->first->value;
+        delete list->first;
         list->first = list->first->next;
         return val;
     }
