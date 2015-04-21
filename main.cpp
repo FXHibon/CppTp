@@ -105,15 +105,40 @@ int get(List *list, int index) {
     }
     return val;
 }
+
+void toString(List *list) {
+    Cell *cell = list->first;
+    cout << "[";
+    while (cell != NULL) {
+        cout << cell->value;
+        if (cell->next != NULL) {
+            cout << ", ";
+        }
+        cell = cell->next;
+    }
+    cout << "]" << endl;
+}
 int main() {
     List *maListe = create();
+    toString(maListe);
     cout << "Size = " << length(maListe) << endl;
     cout << "Pushing 10" << endl;
     push(maListe, 10);
+    toString(maListe);
     cout << "Size = " << length(maListe) << endl;
     cout << "get(0) = " << get(maListe, 0) << endl;
 
     cout << "pop = " << pop(maListe) << endl;
+    toString(maListe);
     cout << "Size = " << length(maListe) << endl;
+
+    cout << "Pushing few values ..." << endl;
+
+    for (int i = 0; i < 10; i++) {
+        push(maListe, i * 10);
+    }
+
+    cout << "Size = " << length(maListe) << endl;
+    toString(maListe);
     return 0;
 }
