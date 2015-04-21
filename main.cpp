@@ -3,6 +3,10 @@
 
 using namespace std;
 
+
+/**
+ * Simple linked list
+ */
 struct Cell {
     int value;
     Cell *next;
