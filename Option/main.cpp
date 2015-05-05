@@ -15,9 +15,9 @@ Option<int> *testFunction(bool res) {
     }
 }
 
-int main() {
-
-    std::cout << testFunction(true) << std::endl;
-    std::cout << testFunction(false) << std::endl;
-
-}
+//int main() {
+//
+//    std::cout << testFunction(true) << std::endl;
+//    std::cout << testFunction(false) << std::endl;
+//
+//}

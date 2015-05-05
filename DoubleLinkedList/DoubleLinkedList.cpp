@@ -13,10 +13,12 @@ template<typename T>
 class DoubleLinkedList {
 
 private:
-    Node<T> *first;
 
-    Node *nodeFilter(Node *node, std::function<bool(T)>);
+
+    Node<T> *nodeFilter(Node<T> *node, std::function<bool(T)>);
 public:
+
+    Node<T> *first;
 
     DoubleLinkedList() {
         this->first = 0;
@@ -114,19 +116,16 @@ T DoubleLinkedList<T>::get(int index) {
 
 template<typename T>
 void DoubleLinkedList<T>::toString() {
-    if (this->first == 0) {
-        std::cout << "[]" << std::endl;
-        return;
-    }
     Node<T> *cell = this->first;
-    std::cout << "[\n";
+    std::cout << "[";
     while (cell != 0) {
-        std::cout << "\t";
         std::cout << cell->value;
-        std::cout << "\n";
+        if (cell->next != 0) {
+            std::cout << ", ";
+        }
         cell = cell->next;
     }
-    std::cout << "]\n" << std::endl;
+    std::cout << "]" << std::endl;
 }
 
 template<typename T>
@@ -201,17 +200,51 @@ DoubleLinkedList<T> *DoubleLinkedList<T>::filter(std::function<bool(T)> cls) {
 }
 
 template<typename T>
-Node *DoubleLinkedList<T>::nodeFilter(Node *node, std::function<bool(T)> cls) {
+Node<T> *DoubleLinkedList<T>::nodeFilter(Node<T> *node, std::function<bool(T)> cls) {
     if (node == 0) {
         return 0;
     } else if (cls(node->value)) {
-        Node *tmp = new Node();
+        Node<T> *tmp = new Node<T>();
         tmp->value = node->value;
-        tmp->next = cls(node->next, cls);
+        tmp->next = nodeFilter(node->next, cls);
         return tmp;
     } else {
         return nodeFilter(node->next, cls);
     }
 }
+
+template<typename T, typename U>
+Node<U> *nodeMap(Node<T> *node, std::function<U(T)> cls) {
+    if (node == 0) {
+        return 0;
+    } else {
+        Node<U> *tmp = new Node<U>();
+        tmp->value = cls(node->value);
+        tmp->next = nodeMap(node->next, cls);
+        return tmp;
+    }
+}
+
+template<typename T, typename U>
+DoubleLinkedList<U> *map(DoubleLinkedList<T> *list, std::function<U(T)> cls) {
+    return new DoubleLinkedList<U>(
+            nodeMap(list->first, cls)
+    );
+}
+
+template<typename T, typename U>
+U nodeFold(Node<T> *node, U acc, std::function<U(T)> cls) {
+    if (node == 0) {
+        return acc;
+    } else {
+        return cls(node->value) + nodeFold(node->next, acc, cls);
+    };
+}
+
+template<typename T, typename U>
+U fold(DoubleLinkedList<T> *list, U acc, std::function<U(T)> cls) {
+    return nodeFold(list->first, acc, cls);
+}
+
 
 #endif //DOUBLE_LINKEDLIST_CPP
