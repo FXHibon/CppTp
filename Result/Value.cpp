@@ -2,14 +2,12 @@
 // Created by fx on 05/05/2015.
 //
 
-#ifndef COURS_RESULT
-#define COURS_RESULT
 
 #include "Result.cpp"
 #include "../Option/Some.cpp"
 
 template<typename T, typename U>
-class Value : Result<T, U> {
+class Value : public Result<T, U> {
 
 private:
     T val;
@@ -46,5 +44,3 @@ template<typename T, typename U>
 Option<T> *Value<T, U>::toOption() {
     return new Some<T>(val);
 }
-
-#endif //COURS_RESULT

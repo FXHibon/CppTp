@@ -6,7 +6,7 @@
 #include "../Option/None.cpp"
 
 template<typename T, typename U>
-class Error : Result<T, U> {
+class Error : public Result<T, U> {
 
 private:
     U val;

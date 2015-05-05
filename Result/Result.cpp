@@ -2,6 +2,9 @@
 // Created by fx on 05/05/2015.
 //
 
+#ifndef COURS_RESULT
+#define COURS_RESULT
+
 #include "../Option/Option.cpp"
 
 template<typename T, typename U>
@@ -15,3 +18,5 @@ public:
 
     virtual Option<T> *toOption() = 0;
 };
+
+#endif

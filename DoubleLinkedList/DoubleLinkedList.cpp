@@ -8,6 +8,9 @@
 #include <iostream>
 #include <functional>
 #include "Node.cpp"
+#include "../Result/Result.cpp"
+#include "../Result/Value.cpp"
+#include "../Result/Error.cpp"
 
 template<typename T>
 class DoubleLinkedList {
@@ -244,6 +247,24 @@ U nodeFold(Node<T> *node, U acc, std::function<U(T)> cls) {
 template<typename T, typename U>
 U fold(DoubleLinkedList<T> *list, U acc, std::function<U(T)> cls) {
     return nodeFold(list->first, acc, cls);
+}
+
+template<typename T, typename U, typename V>
+Result<V, U> *map(Result<T, U> *result, std::function<T(V)> cls) {
+    if (result->isOk()) {
+        return new Value<V, U>(cls(result->get()));
+    } else {
+        return new Error<V, U>(result->getError());
+    }
+}
+
+template<typename T, typename U, typename V>
+Result<V, U> *mapError(Result<T, U> *result, std::function<U(V)> cls) {
+    if (result->isOk()) {
+        return new Value<V, U>(result->get());
+    } else {
+        return new Error<V, U>(cls(result->getError()));
+    }
 }
 
 
