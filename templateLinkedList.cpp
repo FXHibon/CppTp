@@ -8,14 +8,14 @@ using namespace std;
  * Simple linked list
  */
 template <typename T>
-struct Cell {
+struct Node {
     T value;
-    Cell<T> *next;
+    Node<T> *next;
 };
 
 template <typename T>
 struct List {
-    Cell<T> *first;
+    Node<T> *first;
 };
 
 template <typename T>
@@ -48,7 +48,7 @@ List<T> *create() {
  */
 template <typename T>
 void push(List<T> *list, T val) {
-    Cell<T> *cell = new Cell<T>;
+    Node<T> *cell = new Node<T>;
     cell->value = val;
     cell->next = list->first;
     list->first = cell;
@@ -74,7 +74,7 @@ T pop(List<T> *list) {
  */
 template <typename T>
 int length(List<T> *list) {
-    Cell<T> *cell = list->first;
+    Node<T> *cell = list->first;
     T val = 0;
     while (cell != NULL) {
         cell = cell->next;
@@ -88,7 +88,7 @@ int length(List<T> *list) {
  */
 template <typename T>
 T get(List<T> *list, int index) {
-    Cell<T> *cell = list->first;
+    Node<T> *cell = list->first;
     int val = 0;
     while (cell != NULL) {
         if (val == index) {
@@ -103,7 +103,7 @@ T get(List<T> *list, int index) {
 
 template <typename T>
 void toString(List<T> *list) {
-    Cell<T> *cell = list->first;
+    Node<T> *cell = list->first;
     cout << "[";
     while (cell != NULL) {
         cout << cell->value;

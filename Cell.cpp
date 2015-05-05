@@ -3,11 +3,11 @@
 //
 
 template<typename T>
-class Cell {
+class Node {
 
 public:
     T value;
-    Cell<T> *next;
+    Node<T> *next;
 
-    Cell() { }
+    Node() { }
 };

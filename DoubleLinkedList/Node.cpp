@@ -3,12 +3,12 @@
 //
 
 template<typename T>
-class Cell {
+class Node {
 
 public:
     T value;
-    Cell<T> *next;
-    Cell<T> *prev;
+    Node<T> *next;
+    Node<T> *prev;
 
-    Cell() { }
+    Node() { }
 };

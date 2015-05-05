@@ -6,19 +6,24 @@
 #define DOUBLE_LINKEDLIST_CPP
 
 #include <iostream>
-#include "Cell.cpp"
+#include <functional>
+#include "Node.cpp"
 
 template<typename T>
 class DoubleLinkedList {
 
 private:
-    Cell<T> *first;
+    Node<T> *first;
 
+    Node *nodeFilter(Node *node, std::function<bool(T)>);
 public:
 
     DoubleLinkedList() {
         this->first = 0;
     }
+
+
+    DoubleLinkedList(Node<T> *first) : first(first) { }
 
     void push(T);
 
@@ -38,6 +43,7 @@ public:
 
     void append(T val);
 
+    DoubleLinkedList<T> *filter(std::function<bool(T)>);
 };
 
 /**
@@ -45,7 +51,7 @@ public:
  */
 template<typename T>
 void DoubleLinkedList<T>::push(T val) {
-    Cell<T> *cell = new Cell<T>;
+    Node<T> *cell = new Node<T>;
 
     cell->value = val;
     cell->next = this->first;
@@ -80,7 +86,7 @@ T DoubleLinkedList<T>::pop() {
  */
 template<typename T>
 int DoubleLinkedList<T>::length() {
-    Cell<T> *cell = this->first;
+    Node<T> *cell = this->first;
     int val = 0;
     while (cell != 0) {
         cell = cell->next;
@@ -94,7 +100,7 @@ int DoubleLinkedList<T>::length() {
  */
 template<typename T>
 T DoubleLinkedList<T>::get(int index) {
-    Cell<T> *cell = this->first;
+    Node<T> *cell = this->first;
     int val = 0;
     while (cell != 0) {
         if (val == index) {
@@ -112,7 +118,7 @@ void DoubleLinkedList<T>::toString() {
         std::cout << "[]" << std::endl;
         return;
     }
-    Cell<T> *cell = this->first;
+    Node<T> *cell = this->first;
     std::cout << "[\n";
     while (cell != 0) {
         std::cout << "\t";
@@ -131,8 +137,8 @@ T DoubleLinkedList<T>::removeLast() {
     }
 
     T val;
-    Cell<T> *cellPrev = 0;
-    Cell<T> *cell = this->first;
+    Node<T> *cellPrev = 0;
+    Node<T> *cell = this->first;
     while (cell->next != 0) {
         cellPrev = cell;
         cell = cell->next;
@@ -148,15 +154,15 @@ T DoubleLinkedList<T>::removeLast() {
 
 template<typename T>
 void DoubleLinkedList<T>::insert(T val, int position) {
-    Cell<T> *cellPrev = 0;
-    Cell<T> *cell = this->first;
+    Node<T> *cellPrev = 0;
+    Node<T> *cell = this->first;
     int count = 0;
     while (cell->next != 0 && count++ < position) {
         cellPrev = cell;
         cell = cell->next;
     }
 
-    Cell<T> *newCell = new Cell<T>();
+    Node<T> *newCell = new Node<T>();
     newCell->value = val;
     newCell->prev = cellPrev;
     newCell->next = cell;
@@ -169,7 +175,7 @@ void DoubleLinkedList<T>::insert(T val, int position) {
 
 template<typename T>
 T DoubleLinkedList<T>::remove(int position) {
-    Cell<T> *cell = this->first;
+    Node<T> *cell = this->first;
     int count = 0;
     T val;
     while (cell->next != 0 && count++ < position) {
@@ -187,6 +193,25 @@ T DoubleLinkedList<T>::remove(int position) {
 template<typename T>
 void DoubleLinkedList<T>::append(T val) {
 
+}
+
+template<typename T>
+DoubleLinkedList<T> *DoubleLinkedList<T>::filter(std::function<bool(T)> cls) {
+    return new DoubleLinkedList(nodeFilter(this->first, cls));
+}
+
+template<typename T>
+Node *DoubleLinkedList<T>::nodeFilter(Node *node, std::function<bool(T)> cls) {
+    if (node == 0) {
+        return 0;
+    } else if (cls(node->value)) {
+        Node *tmp = new Node();
+        tmp->value = node->value;
+        tmp->next = cls(node->next, cls);
+        return tmp;
+    } else {
+        return nodeFilter(node->next, cls);
+    }
 }
 
 #endif //DOUBLE_LINKEDLIST_CPP

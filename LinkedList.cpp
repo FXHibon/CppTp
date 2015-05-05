@@ -12,7 +12,7 @@ template<typename T>
 class DoubleLinkedList {
 
 private:
-    Cell<T> *first;
+    Node<T> *first;
 
 public:
 
@@ -36,7 +36,7 @@ public:
  */
 template<typename T>
 void DoubleLinkedList<T>::push(T val) {
-    Cell<T> *cell = new Cell<T>;
+    Node<T> *cell = new Node<T>;
     cell->value = val;
     cell->next = this->first;
     this->first = cell;
@@ -62,7 +62,7 @@ T DoubleLinkedList<T>::pop() {
  */
 template<typename T>
 int DoubleLinkedList<T>::length() {
-    Cell<T> *cell = this->first;
+    Node<T> *cell = this->first;
     int val = 0;
     while (cell != 0) {
         cell = cell->next;
@@ -76,7 +76,7 @@ int DoubleLinkedList<T>::length() {
  */
 template<typename T>
 T DoubleLinkedList<T>::get(int index) {
-    Cell<T> *cell = this->first;
+    Node<T> *cell = this->first;
     int val = 0;
     while (cell != 0) {
         if (val == index) {
@@ -94,7 +94,7 @@ void DoubleLinkedList<T>::toString() {
         std::cout << "[]" << std::endl;
         return;
     }
-    Cell<T> *cell = this->first;
+    Node<T> *cell = this->first;
     std::cout << "[\n\t";
     while (cell != NULL) {
         std::cout << cell->value;

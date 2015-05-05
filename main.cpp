@@ -7,12 +7,12 @@ using namespace std;
 /**
  * Simple linked list
  */
-struct Cell {
+struct Node {
     int value;
-    Cell *next;
+    Node *next;
 };
 struct List {
-    Cell *first;
+    Node *first;
 };
 
 
@@ -39,7 +39,7 @@ List *create() {
  * Add new elem at the begining of the list
  */
 void push(List *list, int val) {
-    Cell *cell = new Cell;
+    Node *cell = new Node;
     cell->value = val;
     cell->next = list->first;
     list->first = cell;
@@ -63,7 +63,7 @@ int pop(List *list) {
  * Return the list size
  */
 int length(List *list) {
-    Cell *cell = list->first;
+    Node *cell = list->first;
     int val = 0;
     while (cell != NULL) {
         cell = cell->next;
@@ -76,7 +76,7 @@ int length(List *list) {
  * get the index-iem elem of the list
  */
 int get(List *list, int index) {
-    Cell *cell = list->first;
+    Node *cell = list->first;
     int val = 0;
     while (cell != NULL) {
         if (val == index) {
@@ -89,7 +89,7 @@ int get(List *list, int index) {
 }
 
 void toString(List *list) {
-    Cell *cell = list->first;
+    Node *cell = list->first;
     cout << "[";
     while (cell != NULL) {
         cout << cell->value;
@@ -101,31 +101,31 @@ void toString(List *list) {
     cout << "]" << endl;
 }
 
-int main() {
-    List *maListe = create();
-    toString(maListe);
-    cout << "Size = " << length(maListe) << endl;
-    cout << "Pushing 10" << endl;
-    push(maListe, 10);
-    toString(maListe);
-    cout << "Size = " << length(maListe) << endl;
-    cout << "get(0) = " << get(maListe, 0) << endl;
-
-    cout << "pop = " << pop(maListe) << endl;
-    toString(maListe);
-    cout << "Size = " << length(maListe) << endl;
-
-    cout << "Pushing few values ..." << endl;
-
-    for (int i = 0; i < 10; i++) {
-        push(maListe, i * 10);
-    }
-
-    cout << "Size = " << length(maListe) << endl;
-    toString(maListe);
-
-    cout << "pop = " << pop(maListe) << endl;
-    cout << "Size = " << length(maListe) << endl;
-    toString(maListe);
-    return 0;
-}
+//int main() {
+//    List *maListe = create();
+//    toString(maListe);
+//    cout << "Size = " << length(maListe) << endl;
+//    cout << "Pushing 10" << endl;
+//    push(maListe, 10);
+//    toString(maListe);
+//    cout << "Size = " << length(maListe) << endl;
+//    cout << "get(0) = " << get(maListe, 0) << endl;
+//
+//    cout << "pop = " << pop(maListe) << endl;
+//    toString(maListe);
+//    cout << "Size = " << length(maListe) << endl;
+//
+//    cout << "Pushing few values ..." << endl;
+//
+//    for (int i = 0; i < 10; i++) {
+//        push(maListe, i * 10);
+//    }
+//
+//    cout << "Size = " << length(maListe) << endl;
+//    toString(maListe);
+//
+//    cout << "pop = " << pop(maListe) << endl;
+//    cout << "Size = " << length(maListe) << endl;
+//    toString(maListe);
+//    return 0;
+//}
