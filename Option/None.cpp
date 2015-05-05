@@ -5,24 +5,22 @@
 #include "Option.cpp"
 
 template<typename T>
-class None : Option {
-private:
-    T val;
+class None : public Option<T> {
 
 public:
-    None<T>();
+    None<T>() { }
 
+    T get();
 
-    virtual T get();
-
-    virtual bool isSome();
+    bool isSome();
 };
 
 template<typename T>
-T None::get() {
-    return val;
+T None<T>::get() {
+    throw;
 }
 
-bool None::isSome() {
+template<typename T>
+bool None<T>::isSome() {
     return false;
 }

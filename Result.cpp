@@ -3,7 +3,7 @@
 //
 
 template<typename T, typename E>
-class Result {
+class Some {
 
 private:
     T val;
@@ -11,12 +11,12 @@ private:
     bool isErr;
 
 public:
-    Result(T value) {
+    Some(T value) {
         val = value;
         isErr = false;
     }
 
-    Result(E err) {
+    Some(E err) {
         error = err;
         isErr = true;
     }
