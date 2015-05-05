@@ -9,14 +9,14 @@
 #include "Cell.cpp"
 
 template<typename T>
-class LinkedList {
+class DoubleLinkedList {
 
 private:
     Cell<T> *first;
 
 public:
 
-    LinkedList() {
+    DoubleLinkedList() {
     }
 
     void push(T);
@@ -35,7 +35,7 @@ public:
  * Add new elem at the begining of the LinkedList
  */
 template<typename T>
-void LinkedList<T>::push(T val) {
+void DoubleLinkedList<T>::push(T val) {
     Cell<T> *cell = new Cell<T>;
     cell->value = val;
     cell->next = this->first;
@@ -46,7 +46,7 @@ void LinkedList<T>::push(T val) {
  * Remove and return first elem of the LinkedList or -1 if empty
  */
 template<typename T>
-T LinkedList<T>::pop() {
+T DoubleLinkedList<T>::pop() {
     if (this->first == 0) {
         throw;
     } else {
@@ -61,7 +61,7 @@ T LinkedList<T>::pop() {
  * Return the LinkedList size
  */
 template<typename T>
-int LinkedList<T>::length() {
+int DoubleLinkedList<T>::length() {
     Cell<T> *cell = this->first;
     int val = 0;
     while (cell != 0) {
@@ -75,7 +75,7 @@ int LinkedList<T>::length() {
  * get the index-iem elem of the LinkedList
  */
 template<typename T>
-T LinkedList<T>::get(int index) {
+T DoubleLinkedList<T>::get(int index) {
     Cell<T> *cell = this->first;
     int val = 0;
     while (cell != 0) {
@@ -89,7 +89,7 @@ T LinkedList<T>::get(int index) {
 }
 
 template<typename T>
-void LinkedList<T>::toString() {
+void DoubleLinkedList<T>::toString() {
     if (this->first == NULL) {
         std::cout << "[]" << std::endl;
         return;
