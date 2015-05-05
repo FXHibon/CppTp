@@ -236,16 +236,16 @@ DoubleLinkedList<U> *map(DoubleLinkedList<T> *list, std::function<U(T)> cls) {
 }
 
 template<typename T, typename U>
-U nodeFold(Node<T> *node, U acc, std::function<U(T)> cls) {
+U nodeFold(Node<T> *node, U acc, std::function<U(T, U)> cls) {
     if (node == 0) {
         return acc;
     } else {
-        return cls(node->value) + nodeFold(node->next, acc, cls);
+        return nodeFold(node->next, cls(acc, node->value), cls);
     };
 }
 
 template<typename T, typename U>
-U fold(DoubleLinkedList<T> *list, U acc, std::function<U(T)> cls) {
+U fold(DoubleLinkedList<T> *list, U acc, std::function<U(T, U)> cls) {
     return nodeFold(list->first, acc, cls);
 }
 

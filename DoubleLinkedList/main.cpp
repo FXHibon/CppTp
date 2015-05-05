@@ -127,6 +127,6 @@ int main() {
             ->toString();
 
     std::cout << "Fold:" << std::endl;
-    std::cout << fold<int, int>(linkedList, 0, [](int x) { return x; }) << endl;
+    std::cout << fold<int, int>(linkedList, 0, [](int acc, int x) { return acc + x; }) << endl;
 }
 
