@@ -4,4 +4,4 @@ project(Cours)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES main.cpp)
-add_executable(Cours ${SOURCE_FILES} templateLinkedList.cpp LinkedList.cpp Cell.cpp mainTemplate.cpp Option/Option.cpp Result.cpp DoubleLinkedList/DoubleLinkedList.cpp DoubleLinkedList/Node.cpp DoubleLinkedList/main.cpp Option/None.cpp Option/Some.cpp Option/main.cpp Result/Result.cpp Result/Value.cpp Result/Error.cpp)
+add_executable(Cours ${SOURCE_FILES} TP/AList.cpp TP/TreeList/TreeList.cpp TP/TreeList/Node.cpp TP/mainTp.cpp TP/LinkedList/Cell.cpp TP/LinkedList/LinkedList.cpp)
